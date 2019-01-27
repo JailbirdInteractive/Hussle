@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -55,7 +57,7 @@
 										<li><a href="jobs-grid-layout-full-page-map.html">Full Page Grid + Map</a></li>
 										<li><a href="jobs-grid-layout-full-page.html">Full Page Grid</a></li>
 										<li><a href="jobs-list-layout-1.html">List Layout 1</a></li>
-										<li><a href="jobs-list-layout-2.html">List Layout 2</a></li>
+										<li><a href="\jobpage">All Jobs</a></li>
 										<li><a href="jobs-grid-layout.html">Grid Layout</a></li>
 									</ul>
 								</li>
@@ -85,7 +87,11 @@
 									</ul>
 								</li>
 								<li><a href="single-freelancer-profile.html">Freelancer Profile</a></li>
+								@if(Auth::check())
 								<li><a href="/addjob">Post a Job</a></li>
+								@else
+								<li><a href="#sign-in-dialog" class="popup-with-zoom-anim log-in-button">Post a Job</a></li>
+								@endif
 								<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
 							</ul>
 						</li>
@@ -96,11 +102,15 @@
 								<li><a href="dashboard-messages.html">Messages</a></li>
 								<li><a href="dashboard-bookmarks.html">Bookmarks</a></li>
 								<li><a href="dashboard-reviews.html">Reviews</a></li>
-								<li><a href="/jobpage">Jobs</a>
+								<li><a href="#">Jobs</a>
 									<ul class="dropdown-nav">
 										<li><a href="dashboard-manage-jobs.html">Manage Jobs</a></li>
 										<li><a href="dashboard-manage-candidates.html">Manage Candidates</a></li>
-										<li><a href="dashboard-post-a-job.html">Post a Job</a></li>
+										@if(Auth::check())
+								<li><a href="/addjob">Post a Job</a></li>
+								@else
+								<li><a href="#sign-in-dialog" class="popup-with-zoom-anim log-in-button">Post a Job</a></li>
+								@endif
 									</ul>
 								</li>
 								<li><a href="dashboard-manage-tasks.html">Tasks</a>
@@ -137,11 +147,98 @@
 			</div>
 			<!-- Left Side Content / End -->
 	<!-- Right Side Content / End -->
-	<div class="right-side">
 
+	<div class="right-side">
+			@if (Auth::check()) 
+			<div class="header-widget">
+
+					<!-- Messages -->
+					<div class="header-notifications user-menu">
+						<div class="header-notifications-trigger">
+							<a href="#"><div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
+						</div>
+							<!-- Dropdown -->
+							<div class="header-notifications-dropdown">
+
+									<!-- User Status -->
+									<div class="user-status">
+		
+										<!-- User Name / Avatar -->
+										<div class="user-details">
+											<div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+											<div class="user-name">
+													{{ Auth::user()->name }} <span>Freelancer</span>
+											</div>
+										</div>
+		
+										<!-- User Status Switcher -->
+										<div class="status-switch" id="snackbar-user-status">
+											<label class="user-online current-status">Online</label>
+											<label class="user-invisible">Invisible</label>
+											<!-- Status Indicator -->
+											<span class="status-indicator" aria-hidden="true"></span>
+										</div>
+								</div>
+		
+								<ul class="user-menu-small-nav">
+									<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+									<li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
+									<li><a href="{{ route('logout') }}"
+										onclick="event.preventDefault();
+													  document.getElementById('logout-form').submit();"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								</ul>
+		
+								</div>
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+										@csrf
+									</form>
+							</div>
+		
+						</div>
+					{{-- <!-- User Status -->
+					<div class="user-status">
+
+			<!-- User Name / Avatar -->
+
+				<div class="user-details">
+						<div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+						<div class="user-name">
+								{{ Auth::user()->name }} <span>Freelancer</span>
+						</div>
+					</div>
+
+					<!-- User Status Switcher -->
+					<div class="status-switch" id="snackbar-user-status">
+						<label class="user-online current-status">Online</label>
+						<label class="user-invisible">Invisible</label>
+						<!-- Status Indicator -->
+						<span class="status-indicator" aria-hidden="true"></span>
+					</div>
+			</div>
+
+			<ul class="user-menu-small-nav">
+				<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+				<li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
+				<li><a href="{{ route('logout') }}"
+					onclick="event.preventDefault();
+								  document.getElementById('logout-form').submit();">
+					<i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+			</ul>
+
+			<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					@csrf
+				</form> --}}
+			</div>
+		</div>
+		</div>
+	</div>
+	</div>
+	@else
 		<div class="header-widget">
 			<a href="#sign-in-dialog" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
 		</div>
+	@endif
+		
 
 
 				<!-- Mobile Navigation Button -->
@@ -188,17 +285,34 @@
 					</div>
 						
 					<!-- Form -->
-					<form method="post" id="login-form">
-						<div class="input-with-icon-left">
+					<form method="POST" action="{{ route('login') }}" id="login-form" name="login-form">
+							@csrf
+					<div class="input-with-icon-left">
 							<i class="icon-material-baseline-mail-outline"></i>
-							<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
+							<input type="text" class="input-text with-border"  class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="email" placeholder="Email Address"  value="{{ old('email') }}" required autofocus/>
+					
+							@if ($errors->has('email'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('email') }}</strong>
+							</span>
+						@endif
 						</div>
 	
 						<div class="input-with-icon-left">
 							<i class="icon-material-outline-lock"></i>
-							<input type="password" class="input-text with-border" name="password" id="password" placeholder="Password" required/>
+							<input type="password" class="input-text with-border" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" placeholder="Password" required/>
+						
+							@if ($errors->has('password'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('password') }}</strong>
+							</span>
+						@endif
 						</div>
-						<a href="#" class="forgot-password">Forgot Password?</a>
+						@if (Route::has('password.request'))
+						<a class="forgot-password" href="{{ route('password.request') }}">
+							{{ __('Forgot Your Password?') }}
+						</a>
+					@endif
 					</form>
 					
 					<!-- Button -->
@@ -235,25 +349,48 @@
 					</div>
 						
 					<!-- Form -->
-					<form method="post" id="register-account-form">
-						<div class="input-with-icon-left">
+					<form method="POST" action="{{ route('register') }}" id="register-form">
+							@csrf
+							<div class="input-with-icon-left">
+									<i class="icon-material-outline-face"></i>
+									<input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="User Name"required autofocus>
+	
+									@if ($errors->has('name'))
+										<span class="invalid-feedback" role="alert">
+											<strong>{{ $errors->first('name') }}</strong>
+										</span>
+									@endif
+								</div>
+
+							<div class="input-with-icon-left">
 							<i class="icon-material-baseline-mail-outline"></i>
-							<input type="text" class="input-text with-border" name="emailaddress-register" id="emailaddress-register" placeholder="Email Address" required/>
+							<input type="text" class="input-text with-border"class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"  placeholder="Email Address" required/>
+						
+							@if ($errors->has('email'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('email') }}</strong>
+							</span>
+						@endif
 						</div>
 	
 						<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
 							<i class="icon-material-outline-lock"></i>
-							<input type="password" class="input-text with-border" name="password-register" id="password-register" placeholder="Password" required/>
+							<input type="password" class="input-text with-border" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"  placeholder="Password" required/>
+							@if ($errors->has('password'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('password') }}</strong>
+							</span>
+						@endif
 						</div>
 	
 						<div class="input-with-icon-left">
 							<i class="icon-material-outline-lock"></i>
-							<input type="password" class="input-text with-border" name="password-repeat-register" id="password-repeat-register" placeholder="Repeat Password" required/>
+							<input type="password" class="input-text with-border" name="password_confirmation"  id="password-confirm" placeholder="Repeat Password" required/>
 						</div>
 					</form>
 					
 					<!-- Button -->
-					<button class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" form="register-account-form">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
+					<button class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" form="register-form">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
 					
 					<!-- Social Login -->
 					<div class="social-login-separator"><span>or</span></div>

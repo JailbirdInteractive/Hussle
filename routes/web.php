@@ -16,3 +16,7 @@ Route::get('/addjob', 'PagesController@addJob');
 Route::post('/postjob', 'JobsController@store');
 Route::get('/jobpage', 'JobsController@index');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
