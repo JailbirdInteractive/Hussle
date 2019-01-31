@@ -12,8 +12,9 @@
 
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/colors/blue.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/colors/blue.css">
+
 
 </head>
 <body>
@@ -34,7 +35,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="\"><img src="images/h-logo.png" alt=""></a>
+					<a href="\"><img src="/images/h-logo.png" alt=""></a>
 				</div>
 
 				<!-- Main Navigation -->
@@ -43,9 +44,8 @@
 
 						<li><a href="#">Home</a>
 							<ul class="dropdown-nav">
-								<li><a href="\">Home 1</a></li>
-								<li><a href="index-2.html">Home 2</a></li>
-								<li><a href="index-3.html">Home 3</a></li>
+								<li><a href="\">Home</a></li>
+								
 							</ul>
 						</li>
 
@@ -53,26 +53,22 @@
 							<ul class="dropdown-nav">
 								<li><a href="#">Browse Jobs</a>
 									<ul class="dropdown-nav">
-										<li><a href="jobs-list-layout-full-page-map.html">Full Page List + Map</a></li>
-										<li><a href="jobs-grid-layout-full-page-map.html">Full Page Grid + Map</a></li>
-										<li><a href="jobs-grid-layout-full-page.html">Full Page Grid</a></li>
-										<li><a href="jobs-list-layout-1.html">List Layout 1</a></li>
-										<li><a href="\jobpage">All Jobs</a></li>
-										<li><a href="jobs-grid-layout.html">Grid Layout</a></li>
+									
+										<li><a href="/jobs">All Jobs</a></li>
 									</ul>
 								</li>
 								<li><a href="#">Browse Tasks</a>
 									<ul class="dropdown-nav">
-										<li><a href="tasks-list-layout-1.html">List Layout 1</a></li>
+										{{-- <li><a href="tasks-list-layout-1.html">List Layout 1</a></li>
 										<li><a href="tasks-list-layout-2.html">List Layout 2</a></li>
 										<li><a href="tasks-grid-layout.html">Grid Layout</a></li>
-										<li><a href="tasks-grid-layout-full-page.html">Full Page Grid</a></li>
+										<li><a href="tasks-grid-layout-full-page.html">Full Page Grid</a></li> --}}
 									</ul>
 								</li>
-								<li><a href="browse-companies.html">Browse Companies</a></li>
-								<li><a href="single-job-page.html">Job Page</a></li>
+								{{-- <li><a href="browse-companies.html">Browse Companies</a></li>
+								<li><a href="/jobpage">Job Page</a></li>
 								<li><a href="single-task-page.html">Task Page</a></li>
-								<li><a href="single-company-profile.html">Company Profile</a></li>
+								<li><a href="single-company-profile.html">Company Profile</a></li> --}}
 							</ul>
 						</li>
 
@@ -80,15 +76,16 @@
 							<ul class="dropdown-nav">
 								<li><a href="#">Find a Freelancer</a>
 									<ul class="dropdown-nav">
-										<li><a href="freelancers-grid-layout-full-page.html">Full Page Grid</a></li>
+										{{-- <li><a href="freelancers-grid-layout-full-page.html">Full Page Grid</a></li>
 										<li><a href="freelancers-grid-layout.html">Grid Layout</a></li>
 										<li><a href="freelancers-list-layout-1.html">List Layout 1</a></li>
-										<li><a href="freelancers-list-layout-2.html">List Layout 2</a></li>
+										<li><a href="freelancers-list-layout-2.html">List Layout 2</a></li> --}}
 									</ul>
 								</li>
-								<li><a href="single-freelancer-profile.html">Freelancer Profile</a></li>
+								
 								@if(Auth::check())
-								<li><a href="/addjob">Post a Job</a></li>
+								<li><a href="users/{{Auth::user()->id}}/edit">Freelancer Profile</a></li>
+								<li><a href="/jobs/create">Post a Job</a></li>
 								@else
 								<li><a href="#sign-in-dialog" class="popup-with-zoom-anim log-in-button">Post a Job</a></li>
 								@endif
@@ -104,10 +101,10 @@
 								<li><a href="dashboard-reviews.html">Reviews</a></li>
 								<li><a href="#">Jobs</a>
 									<ul class="dropdown-nav">
-										<li><a href="dashboard-manage-jobs.html">Manage Jobs</a></li>
+										<li><a href="/jobs">Manage Jobs</a></li>
 										<li><a href="dashboard-manage-candidates.html">Manage Candidates</a></li>
 										@if(Auth::check())
-								<li><a href="/addjob">Post a Job</a></li>
+								<li><a href="/jobs/create">Post a Job</a></li>
 								@else
 								<li><a href="#sign-in-dialog" class="popup-with-zoom-anim log-in-button">Post a Job</a></li>
 								@endif
@@ -155,7 +152,7 @@
 					<!-- Messages -->
 					<div class="header-notifications user-menu">
 						<div class="header-notifications-trigger">
-							<a href="#"><div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
+							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt=""></div></a>
 						</div>
 							<!-- Dropdown -->
 							<div class="header-notifications-dropdown">
@@ -165,9 +162,9 @@
 		
 										<!-- User Name / Avatar -->
 										<div class="user-details">
-											<div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+											<div class="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt=""></div>
 											<div class="user-name">
-													{{ Auth::user()->name }} <span>Freelancer</span>
+													{{ Auth::user()->name }} <span>{{Auth::user()->account_type}}</span>
 											</div>
 										</div>
 		
@@ -181,8 +178,8 @@
 								</div>
 		
 								<ul class="user-menu-small-nav">
-									<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-									<li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
+									<li><a href="/settings"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+									<li><a href="/users/{{Auth::user()->id}}/edit"><i class="icon-material-outline-settings"></i> Settings</a></li>
 									<li><a href="{{ route('logout') }}"
 										onclick="event.preventDefault();
 													  document.getElementById('logout-form').submit();"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
@@ -336,20 +333,21 @@
 					</div>
 	
 					<!-- Account Type -->
+				<!-- Form -->
+				<form method="POST" action="{{ route('register') }}" id="register-form">
 					<div class="account-type">
 						<div>
-							<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked/>
+							<input type="radio" name="account_type" id="freelancer-radio" class="account-type-radio" value="Freelancer" checked/>
 							<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
 						</div>
 	
 						<div>
-							<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio"/>
+							<input type="radio" name="account_type" id="employer-radio" class="account-type-radio" value="Employer"/>
 							<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
 						</div>
 					</div>
 						
-					<!-- Form -->
-					<form method="POST" action="{{ route('register') }}" id="register-form">
+					
 							@csrf
 							<div class="input-with-icon-left">
 									<i class="icon-material-outline-face"></i>
@@ -406,19 +404,19 @@
 	</div>
 <!-- Scripts
 ================================================== -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.0.min.js"></script>
-<script src="js/mmenu.min.js"></script>
-<script src="js/tippy.all.min.js"></script>
-<script src="js/simplebar.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-<script src="js/snackbar.js"></script>
-<script src="js/clipboard.min.js"></script>
-<script src="js/counterup.min.js"></script>
-<script src="js/magnific-popup.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
 </body>
 </html>
 

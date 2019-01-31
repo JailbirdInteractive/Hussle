@@ -16,6 +16,8 @@ class JobsController extends Controller
     {
         //
         $jobs=Job::all();
+        $job=Job::find(1);
+        dd($job->user);
         return view('Pages.jobpage',compact('jobs'));
 
     }
@@ -28,6 +30,8 @@ class JobsController extends Controller
     public function create()
     {
         //
+        return view('pages.postjobdash');
+
     }
 
     /**
@@ -47,7 +51,8 @@ $request->validate([
 'jobpaymin'=>'required',
 'jobpaymax'=>'required',
 'jobcat'=>'required',
-'joblocation'=>'required'
+'joblocation'=>'required',
+
 
 ]);
     

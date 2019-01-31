@@ -229,7 +229,7 @@
 									<!-- Job Listing Footer -->
 									<div class="job-listing-footer">
 										<ul>
-											<li><i class="icon-material-outline-business"></i> Hussle LLC. <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
+											<li><i class="icon-material-outline-business"></i> {{$job->user->name}} <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
 											<li><i class="icon-material-outline-location-on"></i> {{$job->joblocation}}</li>
 											<li><i class="icon-material-outline-business-center"></i>{{$job->jobtype}}</li>
 											<li><i class="icon-material-outline-access-time"></i>{{$job->created_at}}</li>

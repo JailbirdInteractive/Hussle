@@ -159,7 +159,7 @@
 
 						<!-- Details -->
 						<div class="job-listing-description">
-							<h4 class="job-listing-company">Hussle LLC <span class="verified-badge" title="Verified Employer" data-tippy-placement="top"></span></h4>
+						<h4 class="job-listing-company">{{$job->user->name}}<span class="verified-badge" title="Verified Employer" data-tippy-placement="top"></span></h4>
                         <h3 class="job-listing-title">{{$job->jobtitle}}</h3>
                         <p class="job-listing-text">{{$job->jobdesc}}</p>
 						</div>
